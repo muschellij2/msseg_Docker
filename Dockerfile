@@ -107,7 +107,38 @@ apt-get install -y git-core
 
 RUN r -e 'devtools::install_github("muschellij2/ITKR")' 
 
-RUN r -e 'devtools::install_github("muschellij2/ANTsR")'       
+RUN r -e 'devtools::install_github("muschellij2/ANTsR")'    
+
+
+RUN apt-get build-dep -y r-cran-rgl 
+
+RUN wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz \
+&& tar xzvf cmake-2.8.9.tar.gz \
+&& cd cmake-2.8.9 \
+&& ./configure \
+&& make \
+&& make install \ 
+&& cd ../
+
+RUN apt-get install -y cmake-curses-gui
+
+RUN r -e 'devtools::install_github("muschellij2/extrantsr")'
+
+ENV ZLIB_VERSION    1.2.8
+
+# Installing ZLIB
+RUN wget http://zlib.net/zlib-$ZLIB_VERSION.tar.gz  && \
+    tar -xzf zlib-$ZLIB_VERSION.tar.gz -C /usr/lib/  && \
+    rm /zlib-$ZLIB_VERSION.tar.gz  && \
+    ln -s /usr/lib/zlib-$ZLIB_VERSION /usr/lib/zlib  && \
+    cd /usr/lib/zlib  && \
+    ./configure  && \
+    make
+ENV ZLIB_LIBRARY /usr/lib/zlib
+
+RUN r -e 'devtools::install_github("muschellij2/drammsr")' 
+
+RUN r -e 'devtools::install_github("muschellij2/msseg", force = TRUE)' 
 
 CMD ["bash"]
 
