@@ -126,7 +126,7 @@ ENV ZLIB_LIBRARY /usr/lib/zlib
 
 RUN r -e 'devtools::install_github("muschellij2/drammsr")' 
 
-RUN r -e 'devtools::install_github("muschellij2/msseg"); NULL' 
+RUN r -e 'devtools::install_github("muschellij2/msseg"); print(NULL)' 
 
 RUN wget https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
 && chmod +x segment.r  \

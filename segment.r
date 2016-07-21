@@ -52,6 +52,12 @@ niis = c(
     T1_Post = t1_post,
     T2 = t2,
     PD = pd)
+if (is.character(gold_standard)) {
+  if (gold_standard %in% c("NULL", "")) {
+    gold_standard = NULL
+  }
+}
+
 if (!all_exists(niis)) {
     stop("Not all files passed in exist!")
 }
