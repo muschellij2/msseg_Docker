@@ -129,8 +129,20 @@ RUN r -e 'devtools::install_github("muschellij2/drammsr")'
 RUN r -e 'devtools::install_github("muschellij2/msseg"); NULL' 
 
 RUN wget https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
-&& chmod +x segment.r \
-&& ln -s segment.r /usr/local/bin/segment.r 
+&& chmod +x segment.r  \
+&& mv segment.r /usr/local/bin/segment.r 
+
+
+RUN mkdir test \ 
+&& cd test/ \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
+
+# RUN cd test/ \
+# && segment.r --flair=3DFLAIR.nii.gz --t1_pre=3DT1.nii.gz --t1_post=3DT1GADO.nii.gz --t2=T2.nii.gz --pd=DP.nii.gz --outdir=. 10 output.nii.gz
 
 CMD ["bash"]
 
