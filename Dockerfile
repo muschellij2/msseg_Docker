@@ -110,7 +110,7 @@ RUN wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz \
 
 RUN apt-get install -y cmake-curses-gui
 
-RUN r -e 'devtools::install_github("muschellij2/extrantsr")'
+RUN r -e 'devtools::install_github("muschellij2/extrantsr", force = TRUE)'
 
 ENV ZLIB_VERSION    1.2.8
 
@@ -126,7 +126,11 @@ ENV ZLIB_LIBRARY /usr/lib/zlib
 
 RUN r -e 'devtools::install_github("muschellij2/drammsr")' 
 
-RUN r -e 'devtools::install_github("muschellij2/msseg", force = TRUE)' 
+RUN r -e 'devtools::install_github("muschellij2/msseg");' 
+
+RUN wget https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r ~/segment.r \
+&& ln -s ~/segment.r /usr/local/bin/segment.r \
+&& chmod +x /usr/local/bin/segment.r
 
 CMD ["bash"]
 

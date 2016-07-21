@@ -1,77 +1,92 @@
 {
-    "name": "echo",
+    "name": "muschellij2_msseg",
     "tool-version": "1.0",
-    "description": "Example pipeline for MSSEG challenge",
-    "command-line": "echo [PARAM] [FLAIR_RAW] [T1_RAW] [T2_RAW] [GADO_RAW] [PD_RAW] [FLAIR_PREPROCESSED] [T1_PREPROCESSED] [T2_PREPROCESSED] [GADO_PREPROCESSED] [PD_PREPROCESSED] [MASK] > [OUTPUT_FILE]",
-    "docker-image": "centos:latest",
+    "description": "John Muschelli MSSEG challenge submission",
+    "command-line": "segment.r --flair=[FLAIR] --t1_pre=[T1PRE] --t1_post=[T1POST] --t2=[T2] --pd=[PD] --outdir=[ODIR] [ID] [OUTFILE]",
+    "docker-image": "muschellij2/msseg",
     "docker-index": "http://index.docker.io",
     "schema-version": "0.3",
     "vip:miccai-challenger-email": "jmuschel@jhsph.edu",
     "vip:miccai-challenge-team-name": "jhu",
     "inputs": [
         {
+            "id": "flair_raw",
+            "name": "FLAIR Image",
+            "type": "File",
+            "description": "FLAIR Image",
+            "command-line-key": "[FLAIR]",
+            "list": false,
+            "optional": false,
+            "default-value": "3DFLAIR.nii.gz"            
+        },
+        {
+            "id": "t1_raw",
+            "name": "T1 Pre-GAD Image",
+            "type": "File",
+            "description": "T1 Pre-GAD Image",
+            "command-line-key": "[T1PRE]",
+            "list": false,
+            "optional": false,
+            "default-value": "3DT1.nii.gz"            
+        },
+        {
+            "id": "gado_raw",
+            "name": "T1 Post-GAD Image",
+            "type": "File",
+            "description": "T1 Post-GAD Image",
+            "command-line-key": "[T1POST]",
+            "list": false,
+            "optional": false,
+            "default-value": "3DT1GADO.nii.gz"            
+        },
+        {
+            "id": "t2_raw",
+            "name": "T2 Image",
+            "type": "File",
+            "description": "T2 Image",
+            "command-line-key": "[T2]",
+            "list": false,
+            "optional": false,
+            "default-value": "T2.nii.gz"            
+        },        
+        {
+            "id": "pd_raw",
+            "name": "PD Image",
+            "type": "File",
+            "description": "PD Image",
+            "command-line-key": "[PD]",
+            "list": false,
+            "optional": false,
+            "default-value": "DP.nii.gz"            
+        },
+        {
             "id": "important_parameter",
-            "name": "Important parameter",
+            "name": "This is the ID of the patient",
             "type": "String",
-            "description": "This is a parameter",
+            "description": "This is the ID of the patient",
             "command-line-key": "[PARAM]",
             "list": false,
             "optional": false,
             "default-value": "10"
-        },
+        },        
         {
-            "id": "flair_raw",
-            "name": "Image to segment (FLAIR)",
-            "type": "File",
-            "description": "Image to segment (FLAIR)",
-            "command-line-key": "[FLAIR_RAW]",
+            "id": "outdir",
+            "name": "Output directory",
+            "type": "directory",
+            "description": "Directory for intermediate files",
+            "command-line-key": "[PD]",
             "list": false,
-            "optional": false
-        },
-        {
-            "id": "t1_raw",
-            "name": "Image to segment (T1)",
-            "type": "File",
-            "description": "Image to segment (T1)",
-            "command-line-key": "[T1_RAW]",
-            "list": false,
-            "optional": false
-        },
-        {
-            "id": "t2_raw",
-            "name": "Image to segment (T2)",
-            "type": "File",
-            "description": "Image to segment (T2)",
-            "command-line-key": "[T2_RAW]",
-            "list": false,
-            "optional": false
-        },
-        {
-            "id": "gado_raw",
-            "name": "Image to segment (GADO)",
-            "type": "File",
-            "description": "Image to segment (GADO)",
-            "command-line-key": "[GADO_RAW]",
-            "list": false,
-            "optional": false
-        },
-        {
-            "id": "pd_raw",
-            "name": "Image to segment (PD)",
-            "type": "File",
-            "description": "Image to segment (PD)",
-            "command-line-key": "[PD_RAW]",
-            "list": false,
-            "optional": false
-        }
+            "optional": false,
+            "default-value": "."            
+        }       
     ],
     "output-files": [
         {
             "id": "segmentation_result_challenge",
             "name": "Segmented image",
             "description": "The segmented image",
-            "command-line-key": "[OUTPUT_FILE]",
-            "path-template": "output.txt"
+            "command-line-key": "[OUTFILE]",
+            "path-template": "output.nii.gz"
         }
     ]
 }

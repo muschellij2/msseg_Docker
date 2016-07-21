@@ -10,7 +10,7 @@ suppressMessages(library(docopt))
 # we need docopt (>= 0.3) 
 
 ## configuration for docopt
-doc <- "Usage: segment.r [--flair=<FLAIR>] [--t1_pre=<T1PRE>] [--t1_post=<T1POST>] [--t2=<T2>] [--pd=<PD>] [--lesion=<GOLD>] [--outdir=<ODIR>] [-h] OUTFILE
+doc <- "Usage: segment.r [--flair=<FLAIR>] [--t1_pre=<T1PRE>] [--t1_post=<T1POST>] [--t2=<T2>] [--pd=<PD>] [--lesion=<GOLD>] [--outdir=<ODIR>] [-h] ID OUTFILE
 
 Options:
 -f --flair=<FLAIR>     FLAIR Image [default: 3DFLAIR.nii.gz]
@@ -23,6 +23,7 @@ Options:
 -h --help           show this help text
 
 Arguments:
+ID        ID of patient
 OUTFILE   Output filename
 "
 
