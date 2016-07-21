@@ -2,7 +2,7 @@
     "name": "muschellij2_msseg",
     "tool-version": "1.0",
     "description": "John Muschelli MSSEG challenge submission",
-    "command-line": "segment.r --flair=[FLAIR] --t1_pre=[T1PRE] --t1_post=[T1POST] --t2=[T2] --pd=[PD] --outdir=[ODIR] [ID] [OUTFILE]",
+    "command-line": "segment.r --flair=[FLAIR] --t1_pre=[T1PRE] --t1_post=[T1POST] --t2=[T2] --pd=[PD] --outdir=[OUTDIR] [ID] [OUTFILE]",
     "docker-image": "muschellij2/msseg",
     "docker-index": "http://index.docker.io",
     "schema-version": "0.3",
@@ -74,7 +74,7 @@
             "name": "Output directory",
             "type": "directory",
             "description": "Directory for intermediate files",
-            "command-line-key": "[PD]",
+            "command-line-key": "[OUTDIR]",
             "list": false,
             "optional": false,
             "default-value": "."            
