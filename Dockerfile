@@ -11,10 +11,8 @@ RUN useradd docker \
 
 RUN apt-get update \ 
     && apt-get install -y --no-install-recommends \
-        ed \
         less \
         locales \
-        vim-tiny \
         wget \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/*
@@ -23,7 +21,7 @@ RUN wget -O- http://neuro.debian.net/lists/wily.us-tn.full | tee /etc/apt/source
  && apt-key adv --recv-keys --keyserver hkp://pgp.mit.edu:80 0xA5D32F012649A5A9
 
 RUN apt-get update \
-    && apt-get install -y fsl-complete
+    && apt-get install -y fsl-core
 
 
 ## Configure default locale, see https://github.com/rocker-org/rocker/issues/19
@@ -45,7 +43,8 @@ RUN apt-get update \
 RUN apt-get install -y build-essential    
 
 RUN apt-get update \
-    && apt-get install -y libssl-dev \
+    && apt-get install -y \
+    libssl-dev \
     libcurl4-openssl-dev \
     zlib1g-dev \
     libssh2-1-dev \
@@ -64,34 +63,23 @@ RUN echo 'options(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.m
 
 RUN install.r getopt
 
-
 ## Install the Hadleyverse packages (and some close friends). 
 RUN install.r \
     devtools \
     xml2 \
-    knitr \
     dplyr \
-    rmarkdown \
     base64enc
-
-
 
 
 ## Manually install (useful packages from) the SUGGESTS list of the above packages.
 ## (because --deps TRUE can fail when packages are added/removed from CRAN)
 RUN install.r \
-    base64enc \
     data.table \
     downloader \
     git2r \
     MASS \
     Rcpp \
     roxygen2 \
-    RMySQL \
-    RPostgreSQL \
-    RSQLite \
-    testit \
-    withr \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds
 
 RUN r -e 'devtools::install_github("muschellij2/oro.nifti")' 
