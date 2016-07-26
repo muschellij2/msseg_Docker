@@ -64,7 +64,7 @@
             "name": "This is the ID of the patient",
             "type": "String",
             "description": "This is the ID of the patient",
-            "command-line-key": "[PARAM]",
+            "command-line-key": "[ID]",
             "list": false,
             "optional": false,
             "default-value": "10"
