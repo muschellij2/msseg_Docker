@@ -144,6 +144,10 @@ RUN wget https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segme
 # RUN cd test/ \
 # && segment.r --flair=3DFLAIR.nii.gz --t1_pre=3DT1.nii.gz --t1_post=3DT1GADO.nii.gz --t2=T2.nii.gz --pd=DP.nii.gz --outdir=. 10 output.nii.gz
 
+RUN usermod -u 504 docker
+
+ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/fsl/5.0
+
 CMD ["bash"]
 
 
