@@ -10,7 +10,7 @@ suppressMessages(library(docopt))
 # we need docopt (>= 0.3) 
 
 ## configuration for docopt
-doc <- "Usage: segment.r [--flair=<FLAIR>] [--t1_pre=<T1PRE>] [--t1_post=<T1POST>] [--t2=<T2>] [--pd=<PD>] [--lesion=<GOLD>] [--outdir=<ODIR>] [-h] ID OUTFILE
+doc <- "Usage: segment.r [--flair=<FLAIR>] [--t1_pre=<T1PRE>] [--t1_post=<T1POST>] [--t2=<T2>] [--pd=<PD>] [--lesion=<GOLD>] [--outdir=<ODIR>] [--ntemplate=<NTEMP>] [-h] ID OUTFILE
 
 Options:
 -f --flair=<FLAIR>     FLAIR Image [default: 3DFLAIR.nii.gz]
@@ -20,6 +20,7 @@ Options:
 -p --pd=<PD>   PD Image [default: DP.nii.gz]
 -l --lesion=<GOLD>   Gold Standard Image/Segmentation [default: NULL]
 -o --outdir=<ODIR>   Output directory for intermediary [default: '.']
+-n --ntemplate=<NTEMP>   Number of Templates [default: 15]
 -h --help           show this help text
 
 Arguments:
@@ -45,6 +46,10 @@ t2 = opt[["--t2"]]
 pd = opt[["--pd"]]
 gold_standard = opt[["--lesion"]]
 outdir = opt[["--outdir"]]
+num_templates = opt[["--ntemplate"]]
+if (is.null(num_templates)) {
+  num_templates = 15
+}
 
 niis = c(
     FLAIR = flair,
@@ -71,5 +76,5 @@ msseg_pipeline(
   gold_standard = gold_standard,
   outdir = outdir,
   outfile = ofile,
-  num_templates = 15,
+  num_templates = num_templates,
   verbose = TRUE)
