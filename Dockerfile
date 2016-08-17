@@ -94,9 +94,9 @@ RUN r -e 'devtools::install_github("stnava/cmaker")'
 RUN apt-get update && \
 apt-get install -y git-core
 
-RUN r -e 'devtools::install_github("muschellij2/ITKR")' 
+# RUN r -e 'devtools::install_github("stnava/ITKR")' 
 
-RUN r -e 'devtools::install_github("muschellij2/ANTsR")'    
+# RUN r -e 'devtools::install_github("stnava/ANTsR")'    
 
 
 RUN apt-get build-dep -y r-cran-rgl 
@@ -111,7 +111,8 @@ RUN wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz \
 
 RUN apt-get install -y cmake-curses-gui
 
-RUN r -e 'devtools::install_github("muschellij2/extrantsr", force = TRUE, ref = "337095449ce0fa7b85be82bb52090470dfe098dc");'
+# RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "337095449ce0fa7b85be82bb52090470dfe098dc");'
+RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "b9959a2df000c4746fa27a0a7e22caee33c1b0f9");'
 
 ENV ZLIB_VERSION    1.2.8
 
@@ -130,18 +131,18 @@ RUN r -e 'devtools::install_github("muschellij2/drammsr")'
 RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "e12c44d5c2e4ba5d6afeb0f6c0a458821530d524"); print("version 0.1.6.0")' 
 
 RUN wget https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
-&& chmod +x  segment.r  \
+&& chmod +x  segment.r \
 && mv segment.r /usr/local/bin/segment.r 
 
 
-RUN \
-mkdir test \ 
-&& cd test/ \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
+# RUN \
+# mkdir test \ 
+# && cd test/ \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
 
 # RUN cd test/ \
 # && segment.r --flair=3DFLAIR.nii.gz --t1_pre=3DT1.nii.gz --t1_post=3DT1GADO.nii.gz --t2=T2.nii.gz --pd=DP.nii.gz --outdir=. 10 output.nii.gz
