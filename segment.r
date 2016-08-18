@@ -80,4 +80,5 @@ msseg_pipeline(
   outdir = outdir,
   outfile = ofile,
   num_templates = num_templates,
+  force = TRUE,
   verbose = TRUE)

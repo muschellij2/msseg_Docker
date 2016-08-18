@@ -128,21 +128,21 @@ ENV ZLIB_LIBRARY /usr/lib/zlib
 
 RUN r -e 'devtools::install_github("muschellij2/drammsr")' 
 
-RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "8253bdcac5c9856056cef93a9f8f9afedd1a7d1b"); print("version 0.1.6.2")' 
+RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "be0c5ed0b47fe109048dfe7984646d88ea00843e"); print("version 0.1.7.1")' 
 
-RUN wget https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
+RUN wget  https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
 && chmod +x segment.r \
 && mv segment.r /usr/local/bin/segment.r 
 
 
-# RUN \
-# mkdir test \ 
-# && cd test/ \
-# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
-# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
-# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
-# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
-# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
+RUN \
+mkdir test \ 
+&& cd test/ \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
+&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
 
 # RUN cd test/ \
 # && segment.r --flair=3DFLAIR.nii.gz --t1_pre=3DT1.nii.gz --t1_post=3DT1GADO.nii.gz --t2=T2.nii.gz --pd=DP.nii.gz --outdir=. --ntemplate=2 10 output.nii.gz
