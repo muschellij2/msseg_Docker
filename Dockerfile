@@ -135,14 +135,14 @@ RUN wget  https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segm
 && mv segment.r /usr/local/bin/segment.r 
 
 
-RUN \
-mkdir test \ 
-&& cd test/ \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
-&& wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
+# RUN \
+# mkdir test \ 
+# && cd test/ \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DFLAIR.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/3DT1GADO.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/DP.nii.gz \
+# && wget https://raw.githubusercontent.com/muschellij2/msseg_test/master/T2.nii.gz 
 
 # RUN cd test/ \
 # && segment.r --flair=3DFLAIR.nii.gz --t1_pre=3DT1.nii.gz --t1_post=3DT1GADO.nii.gz --t2=T2.nii.gz --pd=DP.nii.gz --outdir=. --ntemplate=2 10 output.nii.gz
