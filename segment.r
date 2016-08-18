@@ -47,8 +47,11 @@ pd = opt[["--pd"]]
 gold_standard = opt[["--lesion"]]
 outdir = opt[["--outdir"]]
 num_templates = opt[["--ntemplate"]]
+
 if (is.null(num_templates)) {
   num_templates = 15
+} else {
+  num_templates = as.numeric(num_templates)
 }
 
 niis = c(
