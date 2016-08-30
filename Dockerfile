@@ -94,12 +94,9 @@ RUN r -e 'devtools::install_github("stnava/cmaker")'
 RUN apt-get update && \
 apt-get install -y git-core
 
-# RUN r -e 'devtools::install_github("stnava/ITKR")' 
+RUN apt-get build-dep -y r-cran-rgl   
 
-# RUN r -e 'devtools::install_github("stnava/ANTsR")'    
-
-
-RUN apt-get build-dep -y r-cran-rgl 
+RUN apt-get install -y r-cran-rgl   
 
 RUN wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz \
 && tar xzvf cmake-2.8.9.tar.gz \
@@ -111,8 +108,13 @@ RUN wget http://www.cmake.org/files/v2.8/cmake-2.8.9.tar.gz \
 
 RUN apt-get install -y cmake-curses-gui
 
+RUN r -e 'devtools::install_github("stnava/ITKR", ref = "dfc5087", upgrade_dependencies = FALSE)' 
+
+RUN r -e 'devtools::install_github("stnava/ANTsR", ref = "af29e38", upgrade_dependencies = FALSE)'   
+
+RUN install2.r --error neuroim
 # RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "337095449ce0fa7b85be82bb52090470dfe098dc");'
-RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "b9959a2df000c4746fa27a0a7e22caee33c1b0f9");'
+RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "572734117c74b3c53ce35f2b99c4526b06e6f857", upgrade_dependencies = FALSE);'
 
 ENV ZLIB_VERSION    1.2.8
 
@@ -128,12 +130,13 @@ ENV ZLIB_LIBRARY /usr/lib/zlib
 
 RUN r -e 'devtools::install_github("muschellij2/drammsr")' 
 
-RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "be0c5ed0b47fe109048dfe7984646d88ea00843e"); print("version 0.1.7.1")' 
+RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "c90a101", upgrade_dependencies = FALSE); print("version 0.1.10.0");' 
 
 RUN wget  https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
 && chmod +x segment.r \
 && mv segment.r /usr/local/bin/segment.r 
 
+RUN ln -s /usr/bin/fsl5.0-flirt /usr/bin/flirt
 
 # RUN \
 # mkdir test \ 
@@ -147,7 +150,7 @@ RUN wget  https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segm
 # RUN cd test/ \
 # && segment.r --flair=3DFLAIR.nii.gz --t1_pre=3DT1.nii.gz --t1_post=3DT1GADO.nii.gz --t2=T2.nii.gz --pd=DP.nii.gz --outdir=. --ntemplate=2 10 output.nii.gz
 
-RUN usermod -u 504 docker
+RUN usermod -u 48 docker
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/fsl/5.0
 
