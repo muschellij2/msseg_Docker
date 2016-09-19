@@ -114,7 +114,7 @@ RUN r -e 'devtools::install_github("stnava/ANTsR", ref = "af29e38", upgrade_depe
 
 RUN install2.r --error neuroim
 # RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "337095449ce0fa7b85be82bb52090470dfe098dc");'
-RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "572734117c74b3c53ce35f2b99c4526b06e6f857", upgrade_dependencies = FALSE);'
+RUN r -e 'devtools::install_github("muschellij2/extrantsr", ref = "66150d9", upgrade_dependencies = FALSE);'
 
 ENV ZLIB_VERSION    1.2.8
 
@@ -130,7 +130,7 @@ ENV ZLIB_LIBRARY /usr/lib/zlib
 
 RUN r -e 'devtools::install_github("muschellij2/drammsr")' 
 
-RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "eec40cb", upgrade_dependencies = FALSE); print("version 0.1.11.1");' 
+RUN r -e 'devtools::install_github("muschellij2/msseg", ref = "907a02e", upgrade_dependencies = FALSE); print("version 0.2.0");' 
 
 RUN wget  https://raw.githubusercontent.com/muschellij2/msseg_Docker/master/segment.r \
 && chmod +x segment.r \
