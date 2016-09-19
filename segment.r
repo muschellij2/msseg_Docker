@@ -77,6 +77,14 @@ if (!all_exists(niis)) {
     stop("Not all files passed in exist!")
 }
 
+
+if (remove_files) {
+  old_fnames = list.files(path = tempdir(),
+                      full.names = TRUE,
+                      pattern = "[.]nii[.]gz")
+}
+
+
 msseg_pipeline(
   t1_pre = t1_pre,
   t1_post = t1_post,
@@ -90,3 +98,13 @@ msseg_pipeline(
   force = TRUE,
   verbose = TRUE,
   remove_files = remove_files)
+
+if (remove_files) {
+  fnames = list.files(path = tempdir(),
+                      full.names = TRUE,
+                      pattern = "[.]nii[.]gz")
+  fnames = setdiff(fnames, old_fnames)
+  if (length(fnames) > 0) {
+    file.remove(fnames)
+  }
+}
