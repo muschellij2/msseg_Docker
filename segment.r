@@ -10,7 +10,7 @@ suppressMessages(library(docopt))
 # we need docopt (>= 0.3) 
 
 ## configuration for docopt
-doc <- "Usage: segment.r [--flair=<FLAIR>] [--t1_pre=<T1PRE>] [--t1_post=<T1POST>] [--t2=<T2>] [--pd=<PD>] [--lesion=<GOLD>] [--outdir=<ODIR>] [--ntemplate=<NTEMP>] [-h] ID OUTFILE
+doc <- "Usage: segment.r [--flair=<FLAIR>] [--t1_pre=<T1PRE>] [--t1_post=<T1POST>] [--t2=<T2>] [--pd=<PD>] [--lesion=<GOLD>] [--outdir=<ODIR>] [--ntemplate=<NTEMP>] [--remove] [-h] ID OUTFILE
 
 Options:
 -f --flair=<FLAIR>     FLAIR Image [default: 3DFLAIR.nii.gz]
@@ -21,6 +21,7 @@ Options:
 -l --lesion=<GOLD>   Gold Standard Image/Segmentation [default: NULL]
 -o --outdir=<ODIR>   Output directory for intermediary [default: '.']
 -n --ntemplate=<NTEMP>   Number of Templates [default: 15]
+-r --remove   Remove files after being done
 -h --help           show this help text
 
 Arguments:
@@ -47,12 +48,18 @@ pd = opt[["--pd"]]
 gold_standard = opt[["--lesion"]]
 outdir = opt[["--outdir"]]
 num_templates = opt[["--ntemplate"]]
+remove_files = opt[["--remove"]]
 
 if (is.null(num_templates)) {
   num_templates = 15
 } else {
   num_templates = as.numeric(num_templates)
 }
+
+if (is.null(remove_files)) {
+  remove_files = FALSE
+}
+
 
 niis = c(
     FLAIR = flair,
@@ -81,4 +88,5 @@ msseg_pipeline(
   outfile = ofile,
   num_templates = num_templates,
   force = TRUE,
-  verbose = TRUE)
+  verbose = TRUE,
+  remove_files = remove_files)
